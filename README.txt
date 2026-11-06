@@ -1,6 +1,11 @@
-Chase Hales, Chris Reyes
 CPSC 335 - Algorithm Engineering, Fall 2026
 Project 2: Counting Reverse Pairs and Counting Islands in a Grid
+
+Group 7: 
+Chase Hales, chales@csu.fullerton.edu
+Chris Reyes, car814435@csu.fullerton.edu
+Alexavier Lualhati, alualhat1@csu.fullerton.edu
+Darren Ngo, dngo18@csu.fullerton.edu
 
 LANGUAGE AND VERSION
   Python 3 (tested with Python 3.13; any Python 3.8 or newer works).
