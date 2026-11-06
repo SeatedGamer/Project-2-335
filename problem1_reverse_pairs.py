@@ -1,4 +1,4 @@
-# Chase Hales, Chris Reyes
+# Chase Hales, Chris Reyes, Alexavier Lualhati, Darren Ngo
 # CPSC 335 - Algorithm Engineering, Project 2
 # Problem 1: Counting Reverse Pairs (divide and conquer)
 #
