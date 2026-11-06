@@ -1,14 +1,19 @@
 # CPSC 335 – Project 2
-
-Name: Chase Hales, Chris Reyes
-Email: car814435@csu.fullerton.edu 
 Course: CPSC 335 Algorithm Engineering, Fall 2026  
 Submission: Project 2  
 Language: Python 3
 
+**Group 7 Members:**
+```
+ Chase Hales, chales@csu.fullerton.edu
+ Chris Reyes, car814435@csu.fullerton.edu
+ Alexavier Lualhati, alualhat1@csu.fullerton.edu
+ Darren Ngo, dngo18@csu.fullerton.edu
+```
+
 ## Problem 1: Counting Reverse Pairs (Divide and Conquer)
 
-A reverse pair is a pair (i, j) with i \< j and nums\[i\] \> 2 × nums\[j\]. The algorithm modifies merge sort. Each call splits the array in half, recursively counts and sorts each half, counts the pairs that cross the halves with a single two-pointer pass, then merges the halves.
+The algorithm designed modifies merge sort with each call splitting the array in half, recursively counting and sorting each half, and counting the pairs that cross the halves with a single two-pointer pass which will then be merged with the other halves.  
 
 ### Pseudocode
 
@@ -42,32 +47,42 @@ function SORT-AND-COUNT(A[0..n-1])
     return (M, leftCount + rightCount + crossCount)
 ```
 
-**Why the two-pointer pass is correct:** because L is sorted ascending, if L\[i\] \> 2 × R\[j\] then L\[i+1\] ≥ L\[i\] \> 2 × R\[j\] as well. So j never has to move backward. Every element left of j forms a pair with L\[i\], and the pass counts every cross pair exactly once. Every pair (i, j) with i \< j either lies entirely in one half, where the recursion counts it, or crosses the halves, where this pass counts it. Sorting the halves does not change which elements are in the left half and which are in the right half, so the cross count stays valid.
+**Why the two-pointer pass is correct:**  
+Since L is sorted ascending ( L[i] > 2 x R[j] ),  
+every element from L[i] in the sorted left half onward forms reverse pairs with R[j] ( L[i+1] >= L[i] > 2 x R[j] ).  
 
-**Baseline (not the graded solution):** checking every pair takes n(n−1)/2 comparisons, which is O(n²). The program runs it only to double-check its answers.
+The two-pointer pass ensures that j never has to move backwards, as both halves are sorted in ascending order. Every pair of (i, j), where i < j, will either lie in one half where the recursion will count it, or cross the halves where the pass will count it, so sorting the halves will not change which elements are in the left or right, making the cross count remain valid. 
 
 ### Mathematical Analysis
 
-**Step count of the combine work.** For a subarray of size n:
+**Step count of the combine work**  
+For a subarray of size n: 
+- Splitting (copying the two halves into new lists): n steps.  
+- Cross-pair pass: the outer loop runs n/2 times, and j increases at most n/2 times in total, so at most n steps.  
+- Merge: each step outputs one element, so n steps.  
+- Total combine work: f(n) ≤ 3cn for a constant c, so f(n) = Θ(n).
 
-• Splitting (copying the two halves into new lists): n steps.  
-• Cross-pair pass: the outer loop runs n/2 times, and j increases at most n/2 times in total, so at most n steps.  
-• Merge: each step outputs one element, so n steps.  
-• Total combine work: f(n) ≤ 3cn for a constant c, so f(n) = Θ(n).
-
-**Recurrence relation.** Each call makes two recursive calls on halves of the array plus linear combine work:
+**Recurrence relation**  
+Each call makes two recursive calls on halves of the array plus linear combine work:
 
 T(n) = 2T(n/2) + Θ(n),    T(1) = Θ(1)
 
-**Master Theorem.** The recurrence has the form T(n) = aT(n/b) + f(n) with a = 2, b = 2, and f(n) = Θ(n). Then n<sup>log<sub>b</sub> a</sup> = n<sup>log<sub>2</sub> 2</sup> = n<sup>1</sup> = n. Since f(n) = Θ(n<sup>log<sub>b</sub> a</sup>), **Case 2** of the Master Theorem applies, which gives T(n) = Θ(n<sup>log<sub>b</sub> a</sup> log n).
+**Master Theorem**  
+The recurrence has the form:  
+T(n) = aT(n/b) + f(n) with a = 2, b = 2, and f(n) = Θ(n) 
 
-Efficiency class: T(n) = Θ(n log n), so O(n log n).  Master Theorem Case 2.
+Then,  
+n<sup>log<sub>b</sub> a</sup> = n<sup>log<sub>2</sub> 2</sup> = n<sup>1</sup> = n. Since f(n) = Θ(n<sup>log<sub>b</sub> a</sup>)  
+
+**Case 2** of the Master Theorem applies, which gives T(n) = Θ(n<sup>log<sub>b</sub> a</sup> log n).
+
+Efficiency class: T(n) = Θ(n log n), so O(n log n). Master Theorem Case 2.
 
 Extra space is O(n) for the merged and copied arrays. The recursion depth is ⌈log<sub>2</sub> n⌉.
 
 ## Problem 2: Counting Islands in a Grid
 
-Each land cell ('1') is a vertex of a graph, with an edge to each land cell directly above, below, left, or right of it. An island is a connected component of this graph. The algorithm scans every cell. When it finds an unvisited '1', it counts a new island and runs a depth-first search (DFS) from that cell to mark the entire island as visited. The DFS uses an explicit stack rather than recursion, so a large island cannot overflow the call stack.
+The algorithm designed counts the number of islands in the grid, scanning every cell of a given 2D grid map of 1s (land) and 0s (water). The algorithm will run a DFS (depth-first search) when it finds an unvisited island to count it as a new island and mark it as visited, using an explicit stack to prevent overflow on the call stack. 
 
 ### Pseudocode
 
