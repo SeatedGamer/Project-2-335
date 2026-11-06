@@ -1,4 +1,4 @@
-Chase Hales
+Chase Hales, Chris Reyes
 CPSC 335 - Algorithm Engineering, Fall 2026
 Project 2: Counting Reverse Pairs and Counting Islands in a Grid
 
@@ -20,18 +20,20 @@ HOW TO RUN
     py problem1_reverse_pairs.py
 
 INPUT
-  The three examples from the assignment for each problem are hard-coded in
-  the main() function of each file. No input file or user typing is needed.
-  To try a different input, edit the "examples" list in main().
+  The three examples from the assignment for each problem are hard-coded at the
+  top of each file in the EXAMPLES list, followed by a list of extra edge-case
+  tests in EXTRA_CASES. No input file or typing is needed.
+  To try a different input, add an entry to either list.
 
 OUTPUT
-  Each program prints every example, the computed answer, the expected answer,
-  and PASS or FAIL. Problem 1 also prints a brute-force O(n^2) count as a
+  Each program prints every example and extra test case, the computed answer,
+  the expected answer, and PASS or FAIL. Problem 1 also prints a brute-force O(n^2) count as a
   cross-check (the brute force is used only for checking, not as the solution).
 
-  Expected results:
+  Expected results for the three assignment examples:
     Problem 1: 4, 3, 13
     Problem 2: 4, 2, 7
+  Every extra test case should also print PASS (nine for each problem).
 
 LIBRARIES / EXTRA FILES
-  None. Only the Python standard language is used; no imports or extra files.
+  None. Only built-in Python is used; there are no imports or extra files.

@@ -1,7 +1,7 @@
 # CPSC 335 – Project 2
 
-Name: Chase Hales  
-Email: [your CSUF email]@csu.fullerton.edu  
+Name: Chase Hales, Chris Reyes
+Email: car814435@csu.fullerton.edu 
 Course: CPSC 335 Algorithm Engineering, Fall 2026  
 Submission: Project 2  
 Language: Python 3
@@ -50,7 +50,7 @@ function SORT-AND-COUNT(A[0..n-1])
 
 **Step count of the combine work.** For a subarray of size n:
 
-• Splitting (copying the two halves): n steps.  
+• Splitting (copying the two halves into new lists): n steps.  
 • Cross-pair pass: the outer loop runs n/2 times, and j increases at most n/2 times in total, so at most n steps.  
 • Merge: each step outputs one element, so n steps.  
 • Total combine work: f(n) ≤ 3cn for a constant c, so f(n) = Θ(n).
@@ -63,7 +63,7 @@ T(n) = 2T(n/2) + Θ(n),    T(1) = Θ(1)
 
 Efficiency class: T(n) = Θ(n log n), so O(n log n).  Master Theorem Case 2.
 
-Extra space is O(n) for the merged arrays. The recursion depth is ⌈log<sub>2</sub> n⌉.
+Extra space is O(n) for the merged and copied arrays. The recursion depth is ⌈log<sub>2</sub> n⌉.
 
 ## Problem 2: Counting Islands in a Grid
 
@@ -110,7 +110,7 @@ Extra space is O(mn): the visited array has mn entries, and in the worst case (a
 
 ## Results
 
-Each program runs the three examples from the assignment. All six produce the expected output. Problem 1 also matches the O(n²) brute-force count on all three examples and on 2,000 additional random arrays tested during development.
+Each program runs the three examples from the assignment plus nine extra edge-case tests (empty input, a single element or cell, all negatives, all zeros, sorted input, all water, all land, a checkerboard, a single row, a single column, and an island inside a lake). All 24 runs produce the expected output. Problem 1 also matches the O(n²) brute-force count on every case here and on 5,000 additional random arrays (values from −20 to 20, lengths 0 to 15) checked while testing; none of those arrays was modified by the function.
 
 ### Problem 1 output
 
@@ -122,6 +122,26 @@ Example 2: nums = [2, 4, 3, 5, 1, 12, 6]
   Output: 3   (expected 3, brute force 3)  PASS
 Example 3: nums = [9, 4, -2, 7, 1, 3, 0]
   Output: 13   (expected 13, brute force 13)  PASS
+
+Extra test cases
+Empty array: nums = []
+  Output: 0   (expected 0, brute force 0)  PASS
+Single element: nums = [7]
+  Output: 0   (expected 0, brute force 0)  PASS
+All negatives, ascending: nums = [-5, -4, -3]
+  Output: 3   (expected 3, brute force 3)  PASS
+All negatives, descending: nums = [-1, -2, -3, -4]
+  Output: 6   (expected 6, brute force 6)  PASS
+All zeros: nums = [0, 0, 0]
+  Output: 0   (expected 0, brute force 0)  PASS
+All equal positives: nums = [2, 2, 2]
+  Output: 0   (expected 0, brute force 0)  PASS
+Sorted ascending: nums = [1, 2, 3, 4, 5]
+  Output: 0   (expected 0, brute force 0)  PASS
+Sorted descending: nums = [5, 4, 3, 2, 1]
+  Output: 4   (expected 4, brute force 4)  PASS
+Positive then negative: nums = [1, -1]
+  Output: 1   (expected 1, brute force 1)  PASS
 ```
 
 ### Problem 2 output
@@ -150,4 +170,44 @@ Example 3: 6 x 6 grid
   1 1 0 1 0 0
   Output: 7   (expected 7)  PASS
 
+Extra test grids
+Empty grid: 0 x 0 grid
+  Output: 0   (expected 0)  PASS
+Single water cell: 1 x 1 grid
+  0
+  Output: 0   (expected 0)  PASS
+Single land cell: 1 x 1 grid
+  1
+  Output: 1   (expected 1)  PASS
+All water: 3 x 3 grid
+  0 0 0
+  0 0 0
+  0 0 0
+  Output: 0   (expected 0)  PASS
+All land: 3 x 4 grid
+  1 1 1 1
+  1 1 1 1
+  1 1 1 1
+  Output: 1   (expected 1)  PASS
+Diagonals do not connect (checkerboard): 3 x 3 grid
+  1 0 1
+  0 1 0
+  1 0 1
+  Output: 5   (expected 5)  PASS
+Single row: 1 x 6 grid
+  1 0 1 1 0 1
+  Output: 3   (expected 3)  PASS
+Single column: 4 x 1 grid
+  1
+  1
+  0
+  1
+  Output: 2   (expected 2)  PASS
+Island inside a lake: 5 x 5 grid
+  1 1 1 1 1
+  1 0 0 0 1
+  1 0 1 0 1
+  1 0 0 0 1
+  1 1 1 1 1
+  Output: 2   (expected 2)  PASS
 ```
